@@ -1,10 +1,6 @@
 // 计算到最近的 “12 月 31 日 24:00”（等同于下一年 1 月 1 日 00:00）的倒计时
 (function(){
-  const daysEl = document.getElementById('days');
-  const hoursEl = document.getElementById('hours');
-  const minutesEl = document.getElementById('minutes');
-  const secondsEl = document.getElementById('seconds');
-  const messageEl = document.getElementById('message');
+  const el = document.getElementById('countdown');
 
   function getTargetDate(){
     const now = new Date();
@@ -23,28 +19,20 @@
 
   function update(){
     const now = new Date();
-    let diff = Math.max(0, target - now);
-    if (diff <= 0) {
-      daysEl.textContent = '0';
-      hoursEl.textContent = '00';
-      minutesEl.textContent = '00';
-      secondsEl.textContent = '00';
-      messageEl.classList.remove('hidden');
-      messageEl.textContent = '倒计时结束，祝你新年快乐！ 🎉';
+    const diff = Math.max(0, target - now);
+    const totalSec = Math.floor(diff / 1000);
+
+    if (totalSec <= 0){
+      el.textContent = '00:00:00';
       clearInterval(timer);
       return;
     }
 
-    const totalSec = Math.floor(diff / 1000);
-    const days = Math.floor(totalSec / (3600*24));
-    const hours = Math.floor((totalSec % (3600*24)) / 3600);
+    const hours = Math.floor(totalSec / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
     const seconds = totalSec % 60;
 
-    daysEl.textContent = days;
-    hoursEl.textContent = pad(hours);
-    minutesEl.textContent = pad(minutes);
-    secondsEl.textContent = pad(seconds);
+    el.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }
 
   // 每秒更新一次；页面可见时确保时间正确（处理系统时钟变化）

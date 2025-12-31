@@ -1,8 +1,9 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
 html,body{height:100%}
 /* 居中悬浮容器 */
-body{background:linear-gradient(135deg,#0f172a,#0b1220);color:#fff;overflow:hidden}
-main{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:900px;padding:1rem 2rem;text-align:center;pointer-events:none}
+body{background:#000;color:#fff;overflow:auto}
+main{height:100vh;display:flex;align-items:center;justify-content:center}
+#countdown{font-weight:900;font-size:clamp(48px,18vw,200px);letter-spacing:0.02em;text-shadow:0 10px 30px rgba(0,0,0,0.6);font-family:inherit}
 
 h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
 #countdown{display:flex;gap:1rem;justify-content:center;align-items:baseline;flex-wrap:wrap;pointer-events:auto}
