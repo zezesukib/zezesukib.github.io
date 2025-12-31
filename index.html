@@ -7,8 +7,10 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <button id="modeBtn" aria-pressed="false" aria-label="切换倒计时模式">切换为除夕</button>
   <main>
-    <div id="countdown" aria-live="polite">00:00:00</div>
+    <div id="label">距离新年还有</div>
+    <div id="countdown" aria-live="polite" data-text="00.00.00">00.00.00</div>
   </main>
   <script src="script.js"></script>
 </body>

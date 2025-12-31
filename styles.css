@@ -1,89 +1,54 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
 html,body{height:100%}
-/* 极简白底黑字 */
-body{background:#fff;color:#000;overflow:auto}
-main{height:100vh;display:flex;align-items:center;justify-content:center}
+/* 极简白底 */
+body{background:#fff;color:#000;overflow:hidden}
+
+/* 左上角切换按钮 */
+button#modeBtn{position:fixed;left:12px;top:12px;padding:8px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:#fff;color:#111;font-weight:700;cursor:pointer;z-index:10}
+button#modeBtn:active{transform:translateY(1px)}
+
+main{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+#label{font-size:clamp(18px,3vw,28px);font-weight:700;color:#111}
+
+/* 倒计时主体：大号字体、平滑循环的彩色渐变、首尾相连并至少包含三个颜色 */
 #countdown{
   position:relative;
   z-index:1;
   font-weight:900;
-  font-size:clamp(48px,18vw,200px);
+  font-size:clamp(80px,22vw,260px);
   letter-spacing:0.02em;
   font-family:inherit;
   color:transparent;
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  /* 连续平滑循环的彩色渐变（首尾颜色相同以避免边缘出现白色/黑色） */
-  background-image: linear-gradient(90deg, #3b82f6 0%, #06b6d4 20%, #a78bfa 40%, #fb7185 60%, #f97316 80%, #3b82f6 100%);
+  background-image: linear-gradient(90deg, #ff5f6d 0%, #ffc371 25%, #6a11cb 50%, #2575fc 75%, #ff5f6d 100%);
+  /* background-size 调整为 200% 并重复，确保颜色连续且首尾相连 */
   background-size: 200% 100%;
   background-repeat: repeat-x;
   animation: gradientShift 8s linear infinite;
-  text-shadow:0 6px 14px rgba(0,0,0,0.06);
+  text-shadow:0 12px 30px rgba(0,0,0,0.08);
+  display:inline-block;
+  padding:8px 16px;
 }
 
-/* 发光（跟随颜色变化）：用伪元素复制文本并模糊，背景与文本一致并同步动画 */
+/* 发光伪元素：复制文本，背景与文本一致并模糊，颜色实时同步 */
 #countdown::before{
   content: attr(data-text);
-  position:absolute;
-  left:0;right:0;top:0;bottom:0;
-  z-index:0;
-  color:transparent;
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-image: linear-gradient(90deg, #3b82f6 0%, #06b6d4 20%, #a78bfa 40%, #fb7185 60%, #f97316 80%, #3b82f6 100%);
+  position:absolute;left:-6px;right:-6px;top:-6px;bottom:-6px;z-index:-1;
+  color:transparent;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-image: linear-gradient(90deg, #ff5f6d 0%, #ffc371 25%, #6a11cb 50%, #2575fc 75%, #ff5f6d 100%);
   background-size: 200% 100%;
   background-repeat: repeat-x;
   animation: gradientShift 8s linear infinite;
-  filter: blur(14px);
-  opacity:0.9;
-  transform: scale(1.06);
-  pointer-events:none;
+  filter: blur(18px);opacity:0.95;transform:scale(1.06);pointer-events:none;
 }
 
-
-h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
-#countdown{display:flex;gap:1rem;justify-content:center;align-items:baseline;flex-wrap:wrap;pointer-events:auto}
-
-/* 时间块样式：更大、更醒目、带玻璃感 */
-.time-box{background:rgba(255,255,255,0.04);border-radius:14px;padding:1rem 1.4rem;min-width:120px;backdrop-filter:blur(6px);box-shadow:0 8px 30px rgba(2,6,23,0.6);transition:transform .28s ease}
-.time-box:hover{transform:translateY(-8px) scale(1.02)}
-
-/* 渐变文字（旋转） */
-.time-box span{
-  display:block;
-  font-weight:800;
-  font-size:4.8rem;
-  line-height:1;
-  color:transparent;
-  -webkit-background-clip:text;
-  background-clip:text;
-  /* 使用 conic-gradient 并通过 --angle 动态旋转 */
-  --angle: 0deg;
-  background: conic-gradient(from var(--angle), #ff5f6d, #ffc371, #6a11cb, #2575fc, #2ee6b6, #ff5f6d);
-  text-shadow:0 3px 30px rgba(0,0,0,0.6);
-  animation: rotateGradient 9s linear infinite;
+@media (max-width:420px){
+  #countdown{font-size:clamp(48px,30vw,140px)}
 }
 
-.time-box small{display:block;margin-top:8px;color:#b8c2cc;font-weight:600}
-
-#message{margin-top:1.2rem;font-weight:700;color:#ffd166}
-.note{margin-top:1rem;color:#9aa6b2;font-size:.95rem}
-.hidden{display:none}
-
-/* 让整体在小屏幕上更友好 */
-@media (max-width:680px){
-  .time-box{min-width:86px;padding:.6rem .8rem}
-  .time-box span{font-size:2.4rem}
-  main{padding:1rem}
-}
-
-@keyframes rotateGradient{
-  from{--angle:0deg}
-  to{--angle:360deg}
-}
-
+/* 动画：平滑循环 */
 @keyframes gradientShift{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
