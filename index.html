@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>年末倒计时</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1>距本年度结束还有</h1>
+    <div id="countdown" aria-live="polite">
+      <div class="time-box"><span id="days">0</span><small>天</small></div>
+      <div class="time-box"><span id="hours">00</span><small>小时</small></div>
+      <div class="time-box"><span id="minutes">00</span><small>分</small></div>
+      <div class="time-box"><span id="seconds">00</span><small>秒</small></div>
+    </div>
+    <p id="message" class="hidden"></p>
+    <p class="note">目标时间：本地时区的 12 月 31 日 24:00（即下一年 1 月 1 日 00:00）</p>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
