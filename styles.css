@@ -4,6 +4,8 @@ html,body{height:100%}
 body{background:#fff;color:#000;overflow:auto}
 main{height:100vh;display:flex;align-items:center;justify-content:center}
 #countdown{
+  position:relative;
+  z-index:1;
   font-weight:900;
   font-size:clamp(48px,18vw,200px);
   letter-spacing:0.02em;
@@ -12,12 +14,32 @@ main{height:100vh;display:flex;align-items:center;justify-content:center}
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
-  /* 从左到右的渐变，会持续移动 */
-  background-image: linear-gradient(90deg, #000000, #3b82f6, #ef4444, #000000);
-  background-size: 300% 100%;
+  /* 窄带移动渐变：中心为彩色带，左右为黑色，整体会平移 */
+  background-image: linear-gradient(90deg, #000 0%, #000 45%, #3b82f6 48%, #ef4444 52%, #000 55%, #000 100%);
+  background-size: 400% 100%;
   animation: gradientShift 6s linear infinite;
-  text-shadow:0 10px 20px rgba(0,0,0,0.12);
+  text-shadow:0 6px 18px rgba(0,0,0,0.12);
 }
+
+/* 发光（跟随颜色变化）：用伪元素复制文本并模糊，背景与文本一致并同步动画 */
+#countdown::before{
+  content: attr(data-text);
+  position:absolute;
+  left:0;right:0;top:0;bottom:0;
+  z-index:0;
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-image: linear-gradient(90deg, #000 0%, #000 45%, #3b82f6 48%, #ef4444 52%, #000 55%, #000 100%);
+  background-size: 400% 100%;
+  animation: gradientShift 6s linear infinite;
+  filter: blur(10px);
+  opacity:0.92;
+  transform: scale(1.05);
+  pointer-events:none;
+}
+
 
 h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
 #countdown{display:flex;gap:1rem;justify-content:center;align-items:baseline;flex-wrap:wrap;pointer-events:auto}
@@ -62,5 +84,6 @@ h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
 
 @keyframes gradientShift{
   0%{background-position:0% 50%}
-  100%{background-position:100% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }

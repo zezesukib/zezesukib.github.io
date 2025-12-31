@@ -32,7 +32,10 @@
     const minutes = Math.floor((totalSec % 3600) / 60);
     const seconds = totalSec % 60;
 
-    el.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    const text = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    el.textContent = text;
+    // 同步 data-text 给伪元素，使发光跟随当前文字
+    el.setAttribute('data-text', text);
   }
 
   // 每秒更新一次；页面可见时确保时间正确（处理系统时钟变化）
