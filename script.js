@@ -4,13 +4,8 @@
 
   function getTargetDate(){
     const now = new Date();
-    // 使用当前年份的 12 月 31 日 24:00（JS 会把小时 24 自动滚到下一天的 00:00）
-    let target = new Date(now.getFullYear(), 11, 31, 24, 0, 0);
-    if (target <= now) {
-      // 如果目标已过，切换到下一年的 12 月 31 日 24:00
-      target = new Date(now.getFullYear() + 1, 11, 31, 24, 0, 0);
-    }
-    return target;
+    // 下一天的本地 00:00:00（本地时区）
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
   }
 
   let target = getTargetDate();
@@ -19,13 +14,14 @@
 
   function update(){
     const now = new Date();
-    const diff = Math.max(0, target - now);
-    const totalSec = Math.floor(diff / 1000);
+    let diff = Math.max(0, target - now);
+    let totalSec = Math.floor(diff / 1000);
 
+    // 若已到或超过目标（午夜），重置到下一个午夜，保持持续倒计时
     if (totalSec <= 0){
-      el.textContent = '00:00:00';
-      clearInterval(timer);
-      return;
+      target = getTargetDate();
+      diff = Math.max(0, target - now);
+      totalSec = Math.floor(diff / 1000);
     }
 
     const hours = Math.floor(totalSec / 3600);
