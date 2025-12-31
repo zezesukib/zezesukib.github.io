@@ -3,8 +3,21 @@ html,body{height:100%}
 /* 极简白底黑字 */
 body{background:#fff;color:#000;overflow:auto}
 main{height:100vh;display:flex;align-items:center;justify-content:center}
-#countdown{font-weight:900;font-size:clamp(48px,18vw,200px);letter-spacing:0.02em;text-shadow:0 10px 20px rgba(0,0,0,0.12);font-family:inherit}
-#countdown{font-weight:900;font-size:clamp(48px,18vw,200px);letter-spacing:0.02em;text-shadow:0 10px 30px rgba(0,0,0,0.6);font-family:inherit}
+#countdown{
+  font-weight:900;
+  font-size:clamp(48px,18vw,200px);
+  letter-spacing:0.02em;
+  font-family:inherit;
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  /* 从左到右的渐变，会持续移动 */
+  background-image: linear-gradient(90deg, #000000, #3b82f6, #ef4444, #000000);
+  background-size: 300% 100%;
+  animation: gradientShift 6s linear infinite;
+  text-shadow:0 10px 20px rgba(0,0,0,0.12);
+}
 
 h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
 #countdown{display:flex;gap:1rem;justify-content:center;align-items:baseline;flex-wrap:wrap;pointer-events:auto}
@@ -45,4 +58,9 @@ h1{font-size:1.1rem;margin-bottom:0.8rem;color:#e6edf3;pointer-events:auto}
 @keyframes rotateGradient{
   from{--angle:0deg}
   to{--angle:360deg}
+}
+
+@keyframes gradientShift{
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
 }
