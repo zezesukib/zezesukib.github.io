@@ -44,13 +44,13 @@
     return new Date(now.getFullYear() + 1, 0, 1, 0, 0, 0);
   }
 
-  // 显示格式：纵向排列 DD天 hh小时 mm分钟 ss秒
+  // 显示格式：纵向排列 DD天 hh小时 mm分钟 ss秒，加空格对齐
   function format(totalSec){
     const days = Math.floor(totalSec / 86400);
     const hours = Math.floor((totalSec % 86400) / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
     const seconds = totalSec % 60;
-    return `${pad(days)}天\n${pad(hours)}小时\n${pad(minutes)}分钟\n${pad(seconds)}秒`;
+    return ` ${pad(days)} 天 \n${pad(hours)} 小时\n${pad(minutes)} 分钟\n ${pad(seconds)} 秒 `;
   }
 
   // 初始化模式
