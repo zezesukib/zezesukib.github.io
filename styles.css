@@ -62,8 +62,8 @@ main{height:100vh;display:flex;flex-direction:column;align-items:center;justify-
   button#modeBtn{padding:6px 10px;left:8px;top:8px}
 }
 
-/* 动画：单向循环渐变 */
+/* 动画：无缝循环渐变 */
 @keyframes gradientShift{
   0%{background-position:0% 50%}
-  100%{background-position:200% 50%}
+  100%{background-position:100% 50%}
 }
