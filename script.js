@@ -54,7 +54,7 @@
   }
 
   // 初始化模式
-  let mode = localStorage.getItem('count_mode') || MODE_NEW;
+  let mode = localStorage.getItem('count_mode') || MODE_CHUXI;
   let target = getTarget(mode);
   let timer = null;
 
