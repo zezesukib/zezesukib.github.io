@@ -27,9 +27,9 @@ main{height:100vh;display:flex;flex-direction:column;align-items:center;justify-
   -webkit-text-fill-color:transparent;
   /* 首尾相连的多色渐变（更亮、首尾相同以避免边缘色块） */
   background-image: linear-gradient(90deg, #ff6b6b 0%, #ffd166 25%, #8b5cf6 50%, #3b82f6 75%, #ff6b6b 100%);
-  background-size: 400% 100%;
-  background-repeat: repeat-x;
-  animation: gradientShift 4s linear infinite;
+  background-size: 20000% 100%;
+  background-repeat: no-repeat;
+  animation: gradientShift 8s linear infinite;
   /* 更明确但在手机上更温和的阴影 */
   text-shadow:none;
   display:inline-block;
@@ -47,9 +47,9 @@ main{height:100vh;display:flex;flex-direction:column;align-items:center;justify-
   background-clip:text;
   -webkit-text-fill-color:transparent;
   background-image: linear-gradient(90deg, #ff6b6b 0%, #ffd166 25%, #8b5cf6 50%, #3b82f6 75%, #ff6b6b 100%);
-  background-size: 400% 100%;
-  background-repeat: repeat-x;
-  animation: gradientShift 4s linear infinite;
+  background-size: 20000% 100%;
+  background-repeat: no-repeat;
+  animation: gradientShift 8s linear infinite;
   /* 亮泛光效果：增加brightness和saturate，确保不被边框影响 */
   filter: blur(10px) saturate(1.5) brightness(1.5);
   opacity:1.0;transform:scale(1.0);pointer-events:none;
