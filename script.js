@@ -50,7 +50,15 @@
     const hours = Math.floor((totalSec % 86400) / 3600);
     const minutes = Math.floor((totalSec % 3600) / 60);
     const seconds = totalSec % 60;
-    return ` ${pad(days)} 天 \n${pad(hours)} 小时\n${pad(minutes)} 分钟\n ${pad(seconds)} 秒 `;
+    const lines = [
+      ` ${pad(days)} 天 `,
+      `${pad(hours)} 小时`,
+      `${pad(minutes)} 分钟`,
+      ` ${pad(seconds)} 秒 `
+    ];
+    const maxLength = Math.max(...lines.map(line => line.length));
+    const paddedLines = lines.map(line => line.padStart(maxLength, ' '));
+    return paddedLines.join('\n');
   }
 
   // 初始化模式
